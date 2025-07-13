@@ -3,15 +3,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
-
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-    <!-- FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -31,110 +29,109 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container">
+                <ul class="navbar-nav ms-auto">
+                        <!-- Imagen redonda de usuario -->
+                        <li class="nav-item d-flex align-items-center me-2">
+                            <img src='<%: ResolveUrl("~/imagenes/logo.png") %>' class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;" alt="Usuario" />
+                        </li>
+                    </ul>
                 <a class="navbar-brand" runat="server" href="~/">Control de Stock</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegación">
+                <asp:Label runat="server" Text="Demo"></asp:Label>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Acerca de</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <asp:LoginView runat="server">
-                            <AnonymousTemplate>
-                                <li class="nav-item">
-                                    <a class="nav-link" runat="server" href="~/Account/Login.aspx">
-                                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" runat="server" href="~/Account/Register.aspx">
-                                        <i class="fas fa-user-plus"></i> Registrarse
-                                    </a>
-                                </li>
-                            </AnonymousTemplate>
-                            <LoggedInTemplate>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-user-circle"></i> <%: Context.User.Identity.Name %>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                        <li><a class="dropdown-item" href="~/Account/Profile.aspx">Perfil</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a class="dropdown-item" href="~/Admin/Panel.aspx">Administración</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a class="dropdown-item" href="~/Account/Logout.aspx">Cerrar sesión</a></li>
-                                    </ul>
-                                </li>
-                            </LoggedInTemplate>
-                        </asp:LoginView>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                      <%--  <!-- Imagen redonda de usuario -->
+                        <li class="nav-item d-flex align-items-center me-2">
+                            <img src='<%: ResolveUrl("~/imagenessitio/imglogin.png") %>' class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Usuario" />
+                        </li>--%>
+
+                        <!-- Menú si está logueado -->
+                        <asp:PlaceHolder ID="phUsuario" runat="server">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> <asp:Literal ID="litNombreUsuario" runat="server" />
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown">
+                                    <li><a class="dropdown-item" href="../Account/Profile.aspx">Perfil</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="Tienda.aspx">Tienda</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <%if Session("idEmpresa") = 1 Then %>
+                                        <li><a class="dropdown-item" href="../AxonNet/PanelAxon.aspx">Panel Axon</a></li>
+                                    <% else %>
+                                        <li><a class="dropdown-item" href="../Account/Panel.aspx">Administración</a></li>
+                                    <%End if %>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    
+                                    <li><a class="dropdown-item" href="../Account/Logout.aspx">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+
+                        <!-- Menú si es visitante -->
+                        <asp:PlaceHolder ID="phAnonimo" runat="server">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Account/Login.aspx"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Account/Registrarse.aspx"><i class="fas fa-user-plus"></i> Registrarse</a>
+                            </li>
+                        </asp:PlaceHolder>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Menú de navegación inferior -->
-        <asp:LoginView ID="RoleMenu" runat="server">
-            <LoggedInTemplate>
-                <% If HttpContext.Current.Session("nivel") = 1 Then %>
-                <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
-                    <div class="container">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Archivos</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="~/Sucursales.aspx">ABM Sucursales</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Cotizacion.aspx">Cotización de moneda</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Productos</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="~/Categorias.aspx">Categorías</a></li>
-                                    <li><a class="dropdown-item" href="~/Marcas.aspx">Marcas</a></li>
-                                    <li><a class="dropdown-item" href="~/Productos.aspx">ABM Productos</a></li>
-                                    <li><a class="dropdown-item" href="~/Fotos.aspx">Agregar Fotos</a></li>
-                                    <li><a class="dropdown-item" href="~/ConfiguracionWeb.aspx">Configuración Web</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Stock</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="~/ConsultaStock.aspx">Consulta Stock</a></li>
-                                    <li><a class="dropdown-item" href="~/Inventario.aspx">Inventario</a></li>
-                                    <li><a class="dropdown-item" href="~/AjusteStock.aspx">Ajuste de Stock</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Clientes.aspx">Clientes</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Proveedores.aspx">Proveedores</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Ventas.aspx">Ventas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Compras.aspx">Compras</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Caja.aspx">Caja</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Configuracion.aspx">Configuración</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                <% End If %>
-            </LoggedInTemplate>
-        </asp:LoginView>
-
+        <!-- Menú dinámico según empresa -->
+       <%-- <asp:PlaceHolder ID="phMenuMaster" runat="server" />--%>
+      
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />  
+            <%IF Session("idRol") = 5 Then %>
             <hr />
             <footer>
-                <p>AXON NET - &copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                <div class="container">
+                    <div class="row text-center text-md-start">
+                        <div class="col-md-3 footer-column">
+                            <h5>Empresa</h5>
+                            <a href="../About.aspx">Sobre nosotros</a><br />
+                            <a href="#">Misión</a><br />
+                            <a href="#">Valores</a>
+                        </div>
+                        <div class="col-md-3 footer-column">
+                            <h5>Servicios</h5>
+                            <a href="#">Soporte</a><br />
+                            <a href="#">Planes</a><br />
+                            <a href="#">Demo</a>
+                        </div>
+                        <div class="col-md-3 footer-column">
+                            <h5>Contacto</h5>
+                            <a href="#">Email</a><br />
+                            <a href="#">Teléfono +54 9 2257 530962</a><br />
+                            <a href="#">Ubicación</a>
+                        </div>
+                        <div class="col-md-3 footer-column">
+                            <h5>Seguinos</h5>
+                            <a href="#"><i class="fab fa-instagram"></i> Instagram</a><br />
+                            <a href="#"><i class="fab fa-x-twitter"></i> X (Twitter)</a><br />
+                            <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a><br />
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a><br />
+                            <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                        </div>
+                    </div>
+                </div>
             </footer>
         </div>
+        <%Else
+            end If
+        %>
     </form>
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,140 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="capaAdministracion.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">Control de Stock</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <asp:LoginView runat="server">
+                            <AnonymousTemplate>
+                                <li class="nav-item">
+                                    <a class="nav-link" runat="server" href="~/Account/Login.aspx">
+                                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" runat="server" href="~/Account/Register.aspx">
+                                        <i class="fas fa-user-plus"></i> Registrarse
+                                    </a>
+                                </li>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i> <%: Context.User.Identity.Name %>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                        <li><a class="dropdown-item" href="~/Account/Profile.aspx">Perfil</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="~/Admin/Panel.aspx">Administración</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="~/Account/Logout.aspx">Cerrar sesión</a></li>
+                                    </ul>
+                                </li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Menú de navegación inferior -->
+        <asp:LoginView ID="RoleMenu" runat="server">
+            <LoggedInTemplate>
+                <% If HttpContext.Current.Session("nivel") = 1 Then %>
+                <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+                    <div class="container">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Archivos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="~/Sucursales.aspx">ABM Sucursales</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Cotizacion.aspx">Cotización de moneda</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Productos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="~/Categorias.aspx">Categorías</a></li>
+                                    <li><a class="dropdown-item" href="~/Marcas.aspx">Marcas</a></li>
+                                    <li><a class="dropdown-item" href="~/Productos.aspx">ABM Productos</a></li>
+                                    <li><a class="dropdown-item" href="~/Fotos.aspx">Agregar Fotos</a></li>
+                                    <li><a class="dropdown-item" href="~/ConfiguracionWeb.aspx">Configuración Web</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Stock</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="~/ConsultaStock.aspx">Consulta Stock</a></li>
+                                    <li><a class="dropdown-item" href="~/Inventario.aspx">Inventario</a></li>
+                                    <li><a class="dropdown-item" href="~/AjusteStock.aspx">Ajuste de Stock</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Clientes.aspx">Clientes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Proveedores.aspx">Proveedores</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Ventas.aspx">Ventas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Compras.aspx">Compras</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Caja.aspx">Caja</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Configuracion.aspx">Configuración</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <% End If %>
+            </LoggedInTemplate>
+        </asp:LoginView>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <hr />
+            <footer>
+                <p>AXON NET - &copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+            </footer>
+        </div>
+    </form>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>

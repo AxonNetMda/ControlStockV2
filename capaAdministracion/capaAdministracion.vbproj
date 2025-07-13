@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>capaAdministracion</RootNamespace>
     <AssemblyName>capaAdministracion</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,9 +160,30 @@
     <Content Include="About.aspx" />
     <Content Include="Account\Confirmar.aspx" />
     <Content Include="Account\Logout.aspx" />
+    <Content Include="Account\nuevaclave.aspx" />
     <Content Include="Account\Panel.aspx" />
     <Content Include="Account\Profile.aspx" />
+    <Content Include="Account\recuperarclave.aspx" />
     <Content Include="Account\Registrarse.aspx" />
+    <Content Include="Account\VerificarCorreoRegistracion.aspx" />
+    <Content Include="Carrusel\imagen1.png" />
+    <Content Include="Carrusel\imagen2.jpg" />
+    <Content Include="Carrusel\imagen3.png" />
+    <Content Include="Carrusel\imagen4.png" />
+    <Content Include="Empresa\Empresa_Editar.aspx" />
+    <Content Include="Empresa\Empresa_Datos.aspx" />
+    <Content Include="imagenes\banco45.png" />
+    <Content Include="imagenes\cuentadni45.jpg" />
+    <Content Include="imagenes\efectivo.jpg" />
+    <Content Include="imagenes\modo45.png" />
+    <Content Include="imagenes\tarjetacredito.jpg" />
+    <Content Include="imagenes\visaelectron.jpg" />
+    <Content Include="AxonNet\PanelAxon.aspx" />
+    <Content Include="productos\Imagenes\sinfoto.jpg" />
+    <Content Include="productos\productos_fotos.aspx" />
+    <Content Include="productos\producto_lista2.aspx" />
+    <Content Include="productos\producto_lista_ABM.aspx" />
+    <Content Include="Tienda.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -181,9 +203,17 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Empresa\Empresa_Listado_Datos.aspx" />
+    <Content Include="Empresa\Empresa_Nuevo.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="imagenessitio\imgLogin.png" />
+    <Content Include="imagenessitio\imgSinFoto.png" />
+    <Content Include="imagenessitio\imgSinImagen.png" />
+    <Content Include="imagenessitio\sinfoto.jpg" />
+    <Content Include="imagenes\mp45.png" />
+    <Content Include="imagenes\transferencia.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -257,6 +287,13 @@
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Account\nuevaclave.aspx.designer.vb">
+      <DependentUpon>nuevaclave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\nuevaclave.aspx.vb">
+      <DependentUpon>nuevaclave.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Account\Panel.aspx.designer.vb">
       <DependentUpon>Panel.aspx</DependentUpon>
     </Compile>
@@ -271,11 +308,25 @@
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Account\recuperarclave.aspx.designer.vb">
+      <DependentUpon>recuperarclave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\recuperarclave.aspx.vb">
+      <DependentUpon>recuperarclave.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Account\Registrarse.aspx.designer.vb">
       <DependentUpon>Registrarse.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Registrarse.aspx.vb">
       <DependentUpon>Registrarse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Account\VerificarCorreoRegistracion.aspx.designer.vb">
+      <DependentUpon>VerificarCorreoRegistracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\VerificarCorreoRegistracion.aspx.vb">
+      <DependentUpon>VerificarCorreoRegistracion.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="App_Start\BundleConfig.vb" />
@@ -287,6 +338,67 @@
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="DBContext\CD_Categoria.vb" />
+    <Compile Include="DBContext\CD_Empresa_Categoria.vb" />
+    <Compile Include="DBContext\CD_Marca.vb" />
+    <Compile Include="DBContext\CD_Producto.vb" />
+    <Compile Include="DBContext\CD_ProductoFotos.vb" />
+    <Compile Include="DBContext\CD_Proveedor.vb" />
+    <Compile Include="Empresa\Empresa_Editar.aspx.designer.vb">
+      <DependentUpon>Empresa_Editar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Editar.aspx.vb">
+      <DependentUpon>Empresa_Editar.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Datos.aspx.designer.vb">
+      <DependentUpon>Empresa_Datos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Datos.aspx.vb">
+      <DependentUpon>Empresa_Datos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Models\empresa_categoria.vb" />
+    <Compile Include="Models\proveedor.vb" />
+    <Compile Include="Models\categoria.vb" />
+    <Compile Include="Models\marca.vb" />
+    <Compile Include="Models\producto.vb" />
+    <Compile Include="Models\productofotos.vb" />
+    <Compile Include="AxonNet\PanelAxon.aspx.designer.vb">
+      <DependentUpon>PanelAxon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AxonNet\PanelAxon.aspx.vb">
+      <DependentUpon>PanelAxon.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="productos\productos_fotos.aspx.designer.vb">
+      <DependentUpon>productos_fotos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productos\productos_fotos.aspx.vb">
+      <DependentUpon>productos_fotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productos\producto_lista2.aspx.designer.vb">
+      <DependentUpon>producto_lista2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productos\producto_lista2.aspx.vb">
+      <DependentUpon>producto_lista2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productos\producto_lista_ABM.aspx.designer.vb">
+      <DependentUpon>producto_lista_ABM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productos\producto_lista_ABM.aspx.vb">
+      <DependentUpon>producto_lista_ABM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tienda.aspx.designer.vb">
+      <DependentUpon>Tienda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tienda.aspx.vb">
+      <DependentUpon>Tienda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
@@ -294,7 +406,16 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Controllers\EmpresaController.vb" />
+    <Compile Include="Controllers\RolController.vb" />
+    <Compile Include="Controllers\TipoDeDocumentoController.vb" />
     <Compile Include="Controllers\UsuarioController.vb" />
+    <Compile Include="DBContext\CD_Empresa.vb" />
+    <Compile Include="DBContext\CD_Empresa_FormadePago.vb" />
+    <Compile Include="DBContext\CD_Formadepago.vb" />
+    <Compile Include="DBContext\CD_Rol.vb" />
+    <Compile Include="DBContext\CD_TipoDeDocumento.vb" />
+    <Compile Include="DBContext\CD_TipoResponsable.vb" />
     <Compile Include="DBContext\Conectar.vb" />
     <Compile Include="Default.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -302,6 +423,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Listado_Datos.aspx.designer.vb">
+      <DependentUpon>Empresa_Listado_Datos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Listado_Datos.aspx.vb">
+      <DependentUpon>Empresa_Listado_Datos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Nuevo.aspx.designer.vb">
+      <DependentUpon>Empresa_Nuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa\Empresa_Nuevo.aspx.vb">
+      <DependentUpon>Empresa_Nuevo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -313,6 +448,12 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Models\empresa.vb" />
+    <Compile Include="Models\empresa_formadepago.vb" />
+    <Compile Include="Models\formadepago.vb" />
+    <Compile Include="Models\rol.vb" />
+    <Compile Include="Models\tipodedocumento.vb" />
+    <Compile Include="Models\tipoderesponsable.vb" />
     <Compile Include="Models\usuarios.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -383,6 +524,7 @@
     <Content Include="Views\_ViewStart.vbhtml" />
     <Content Include="Views\Shared\_Layout.vbhtml" />
     <Content Include="Views\Usuario\View.vbhtml" />
+    <Content Include="Views\Empresa\Lista.vbhtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -392,6 +534,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Rol\" />
+    <Folder Include="Views\TipoDeDocumento\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

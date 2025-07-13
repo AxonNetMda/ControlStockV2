@@ -13,21 +13,39 @@ Option Explicit On
 
 Partial Public Class SiteMaster
 
-	'''<summary>
-	'''Control RoleMenu.
-	'''</summary>
-	'''<remarks>
-	'''Campo generado automáticamente.
-	'''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-	'''</remarks>
-	Protected WithEvents RoleMenu As Global.System.Web.UI.WebControls.LoginView
+    '''<summary>
+    '''Control phUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents phUsuario As Global.System.Web.UI.WebControls.PlaceHolder
 
-	'''<summary>
-	'''Control MainContent.
-	'''</summary>
-	'''<remarks>
-	'''Campo generado automáticamente.
-	'''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-	'''</remarks>
-	Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    '''<summary>
+    '''Control litNombreUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents litNombreUsuario As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Control phAnonimo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents phAnonimo As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''Control MainContent.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class
